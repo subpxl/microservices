@@ -1,0 +1,64 @@
+version: '3'
+
+services:
+  todoservice:
+    build:
+      context: ./todoService
+    ports:
+      - "8000:8000"
+    depends_on:
+      - postgres
+    volumes:
+      - .:/app
+    environment:
+      POSTGRES_URI: "host=postgres user=todoservice dbname=todoservice password=todoservice sslmode=disable"
+  
+
+
+  userservice:
+    build:
+      context: ./userService
+    ports:
+      - "5000:8000"
+    depends_on:
+      - mongodb
+    volumes:
+      - .:/app
+    environment:
+      MONGO_URI: "mongodb://mongodb:27017" 
+  
+
+  postgres:
+    image: postgres:latest
+    container_name: postgres-container
+    environment:
+      POSTGRES_USER: todoservice
+      POSTGRES_PASSWORD: todoservice
+      POSTGRES_DB: todoservice
+    ports:
+      - "5432:5432"
+    volumes:
+      - postgres-data:/var/lib/postgresql/data
+      - ./path/to/your/sql/dump.sql:/docker-entrypoint-initdb.d/init.sql
+
+
+
+  mongodb:
+    image: mongo:latest
+    container_name: mongodb-container
+    ports:
+      - "27017:27017"
+    volumes:
+      - mongodb-data:/data/db  # Adjust the volume path as needed
+
+  redis:
+    image: redis:latest
+    ports: 
+      - "6379:6379"
+    volumes:
+      - redis-data:/data/db
+
+volumes:
+  postgres-data:
+  mongodb-data:
+  redis-data:

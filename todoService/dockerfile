@@ -1,0 +1,27 @@
+FROM golang:alpine  as BUILDER
+
+WORKDIR /app
+
+RUN apk add --no-cache git
+
+COPY . .
+# Download all the dependencies
+RUN go get -d -v ./...
+
+# Install the package
+RUN go install -v ./...
+
+
+RUN CGO_ENABLE=0 GOOS=linux go build -o /main
+
+
+# stage 2
+FROM  alpine
+RUN apk add ca-certificates
+
+COPY --from=BUILDER /main /main
+
+EXPOSE 8000
+
+CMD [ "/main" ]
+

@@ -1,0 +1,15 @@
+syntax ="proto3";
+
+package grpcprotolib;
+
+option go_package = "github.com/aubpxl/supercrud/grpcprotolib";
+
+
+message Message {
+    string body = 1;
+}
+
+
+service LoggerService {
+    rpc SayHello(Message) returns (Message) {}  
+}
