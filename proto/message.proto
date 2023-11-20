@@ -1,15 +1,17 @@
-syntax ="proto3";
-
-package grpcprotolib;
-
-option go_package = "github.com/aubpxl/supercrud/grpcprotolib";
+    syntax ="proto3";
 
 
-message Message {
-    string body = 1;
-}
+    option go_package = "github.com/subpxl/microservices/grpcproto";
+    
+    import "google/protobuf/timestamp.proto";
+
+    message Message {
+        string Body = 1;
+        google.protobuf.Timestamp created_at =2;
+
+    }
 
 
-service LoggerService {
-    rpc SayHello(Message) returns (Message) {}  
-}
+    service LoggerService {
+        rpc SayHello(Message) returns (Message) {}  
+    }

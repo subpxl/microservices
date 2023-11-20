@@ -1,0 +1,23 @@
+name: CI for Todo Service
+
+on:
+  push:
+    branches:
+      - main
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+
+    steps:
+    - name: Checkout repository
+      uses: actions/checkout@v2
+
+    - name: Build and push Docker image for Todo Service
+      uses: docker/build-push-action@v2
+      with:
+        context: ./todoService  # Specify the path to the Dockerfile
+        push: true
+      env:
+        DOCKER_USERNAME: ${{ secrets.DOCKER_USERNAME }}
+        DOCKER_PASSWORD: ${{ secrets.DOCKER_PASSWORD }}

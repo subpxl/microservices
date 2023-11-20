@@ -4,7 +4,7 @@
 // - protoc             v4.25.1
 // source: proto/message.proto
 
-package grpcprotolib
+package grpcproto
 
 import (
 	context "context"
@@ -35,7 +35,7 @@ func NewLoggerServiceClient(cc grpc.ClientConnInterface) LoggerServiceClient {
 
 func (c *loggerServiceClient) SayHello(ctx context.Context, in *Message, opts ...grpc.CallOption) (*Message, error) {
 	out := new(Message)
-	err := c.cc.Invoke(ctx, "/grpcprotolib.LoggerService/SayHello", in, out, opts...)
+	err := c.cc.Invoke(ctx, "/LoggerService/SayHello", in, out, opts...)
 	if err != nil {
 		return nil, err
 	}
@@ -80,7 +80,7 @@ func _LoggerService_SayHello_Handler(srv interface{}, ctx context.Context, dec f
 	}
 	info := &grpc.UnaryServerInfo{
 		Server:     srv,
-		FullMethod: "/grpcprotolib.LoggerService/SayHello",
+		FullMethod: "/LoggerService/SayHello",
 	}
 	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
 		return srv.(LoggerServiceServer).SayHello(ctx, req.(*Message))
@@ -92,7 +92,7 @@ func _LoggerService_SayHello_Handler(srv interface{}, ctx context.Context, dec f
 // It's only intended for direct use with grpc.RegisterService,
 // and not to be introspected or modified (even as a copy)
 var LoggerService_ServiceDesc = grpc.ServiceDesc{
-	ServiceName: "grpcprotolib.LoggerService",
+	ServiceName: "LoggerService",
 	HandlerType: (*LoggerServiceServer)(nil),
 	Methods: []grpc.MethodDesc{
 		{
