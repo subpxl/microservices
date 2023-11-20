@@ -16,10 +16,10 @@ jobs:
     - name: Build and push Docker image for Todo Service
       uses: docker/build-push-action@v2
       with:
-        context: ./todoService  # Specify the path to the Dockerfile
+        context: ./todoservice  # Specify the path to the Dockerfile
         push: true
         tags: |
           docker.io/shubham314/todo-service:latest
       env:
         DOCKER_USERNAME: ${{ secrets.DOCKER_USERNAME }}
-        DOCKER_PASSWORD: ${{ secrets.DOCKER_PASSWORD }}
+        DOCKER_PASSWORD: ${{ secrets.DOCKER_ACCESS_TOKEN }}
