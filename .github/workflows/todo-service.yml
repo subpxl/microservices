@@ -18,6 +18,8 @@ jobs:
       with:
         context: ./todoService  # Specify the path to the Dockerfile
         push: true
+        tags: |
+          docker.io/shubham314/todo-service:latest
       env:
         DOCKER_USERNAME: ${{ secrets.DOCKER_USERNAME }}
         DOCKER_PASSWORD: ${{ secrets.DOCKER_PASSWORD }}
